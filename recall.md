@@ -1,0 +1,11 @@
+- What is the Bernoulli bandit problem?
+	- There are K arms, which give a reward 1 with probability $\theta_i$ and no reward with probability $1-\theta_i$. On each time step, you select an arm K and receive a reward. The goal is to maximise the cumulative expected reward.
+	- It requires exploitation of arms known to have good probabilities, as well as exploration of arms less frequently visited so that better opportunities can be discovered.
+- What is the naive approach to Bernoulli bandit? Including the greedy approach?
+	- The naive approach is to model $\theta_i$ as a point probability rather than a distribution, and e.g. can be the average number of times you have received a reward over time.
+	- The $\epsilon$-greedy approach is to select an arm at random with probability $\epsilon$, and exploit known good actions the rest of the time. This is naive because it will continue to visit arms known to be sub-optimal.
+- How does Thompson sampling improve over the greedy approach?
+	- Thompson sampling calculates a posterior over $\theta_i$ for each i on each time step.
+	- In TS, you also keep a count of successes and failures, as these are the parameters in the distributions. But in order to select an arm on each time step, you **sample from the posterior distributions** instead of just taking the maximum average point probability. That means you **sample each arm according to its probability of being the highest value**. So arms that are known to be sub-optimal will eventually be sampled near 0 times.
+- What is regret?
+	- Regret is a cumulative measure of the difference between the action taken and the optimal action.
